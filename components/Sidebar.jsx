@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import Link from 'next/link'
 
 const Sidebar = ({ active, setActive }) => {
@@ -11,15 +10,19 @@ const Sidebar = ({ active, setActive }) => {
   return (
     <aside id="sidebar" className="ml-[-100%] fixed z-10 top-0 pb-3 px-6 w-full h-screen flex flex-col justify-between border-r bg-white transition-all duration-300 md:w-4/12 lg:ml-0 lg:w-[25%] xl:w-[20%] 2xl:w-[15%]">
       <div>
-        <div className="bg-primary h-16 -mx-6 flex justify-center items-center">
+        <div className="bg-primary h-16 -mx-6 space-x-4 flex justify-center items-center">
           <Link href="/" title="home">
-            <img src="/assets/logo.png" className="w-32" alt="tailus logo" />
+            <img src="/assets/logo.png" className="w-8" alt="tailus logo" />
           </Link>
+          <div className='text-white font-semibold uppercase text-right leading-tight'>
+            <p className='text-[28px]'>Over</p>
+            <p className='text-[12px]'>Engineered</p>
+          </div>
         </div>
 
         <div className="mt-8 text-center">
           <img src="/assets/admin.png" alt="" className="w-16 h-16 m-auto rounded-full object-cover lg:w-24 lg:h-24" />
-          <h5 className="mt-4 text-xl font-semibold text-gray-600 lg:block">Siddharth Varerkar</h5>
+          <h5 className="mt-4 text-xl font-semibold text-gray-600 lg:block">Beluga - Begula</h5>
           <span className="text-gray-400 lg:block">Admin</span>
         </div>
 
@@ -29,7 +32,7 @@ const Sidebar = ({ active, setActive }) => {
             default --> bg-white text-gray-600
             hover --> bg-gray-100 text-gray-600
           */}
-          {/* <li>
+          <li>
             <a onClick={() => {setActive('dashboard'); toggleSidebar()}} aria-label="dashboard" className={`px-4 py-3 cursor-pointer flex items-center space-x-4 rounded-md group ${active === 'dashboard' ? 'text-white bg-gradient-blue' : 'text-gray-600 bg-white hover:bg-gray-100'}`}>
               <svg className="-ml-1 h-6 w-6" viewBox="0 0 24 24" fill="none">
                 <path d="M6 8a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2V8ZM6 15a2 2 0 0 1 2-2h1a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2v-1Z" className={`fill-current text-gray-300 ${active === 'dashboard' ? 'text-gray-100' : 'group-hover:text-primary-light'}`}></path>
@@ -38,9 +41,9 @@ const Sidebar = ({ active, setActive }) => {
               </svg>
               <span className={`${(active === 'dashboard') ? 'font-semibold' : 'font-normal'}`}>Dashboard</span>
             </a>
-          </li> */}
+          </li>
           <li>
-            <a onClick={() => {setActive('database'); toggleSidebar()}} aria-label='database' className={`px-4 py-3 cursor-pointer flex items-center space-x-4 rounded-md group ${active === 'database' ? 'text-white bg-gradient-blue' : 'text-gray-600 bg-white hover:bg-gray-100'}`}>
+            <a onClick={() => { setActive('database'); toggleSidebar() }} aria-label='database' className={`px-4 py-3 cursor-pointer flex items-center space-x-4 rounded-md group ${active === 'database' ? 'text-white bg-gradient-blue' : 'text-gray-600 bg-white hover:bg-gray-100'}`}>
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path className={`fill-current text-gray-300 ${active === 'database' ? 'text-gray-100' : 'group-hover:text-primary-light'}`} fillRule="evenodd" d="M2 6a2 2 0 012-2h4l2 2h4a2 2 0 012 2v1H8a3 3 0 00-3 3v1.5a1.5 1.5 0 01-3 0V6z" clipRule="evenodd" />
                 <path className={`fill-current text-gray-600 ${active === 'database' ? 'text-gray-600' : 'group-hover:text-primary'}`} d="M6 12a2 2 0 012-2h8a2 2 0 012 2v2a2 2 0 01-2 2H2h2a2 2 0 002-2v-2z" />
@@ -49,7 +52,7 @@ const Sidebar = ({ active, setActive }) => {
             </a>
           </li>
           <li>
-            <a onClick={() => {setActive('addGyms'); toggleSidebar()}} aria-label='add gyms' className={`px-4 py-3 cursor-pointer flex items-center space-x-4 rounded-md group ${active === 'addGyms' ? 'text-white bg-gradient-blue' : 'text-gray-600 bg-white hover:bg-gray-100'}`}>
+            <a onClick={() => { setActive('addGyms'); toggleSidebar() }} aria-label='add gyms' className={`px-4 py-3 cursor-pointer flex items-center space-x-4 rounded-md group ${active === 'addGyms' ? 'text-white bg-gradient-blue' : 'text-gray-600 bg-white hover:bg-gray-100'}`}>
               <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                 <path className={`fill-current text-gray-300 ${active === 'addGyms' ? 'text-gray-100' : 'group-hover:text-primary-light'}`} fillRule="evenodd" d="M2 5a2 2 0 012-2h8a2 2 0 012 2v10a2 2 0 002 2H4a2 2 0 01-2-2V5zm3 1h6v4H5V6zm6 6H5v2h6v-2z" clipRule="evenodd" />
                 <path className={`fill-current text-gray-600 ${active === 'addGyms' ? 'text-gray-600' : 'group-hover:text-primary'}`} d="M15 7h1a2 2 0 012 2v5.5a1.5 1.5 0 01-3 0V7z" />

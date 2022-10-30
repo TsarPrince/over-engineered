@@ -62,26 +62,28 @@ const Form = () => {
     }
 
     const location = `${streetAddress}, ${city}, ${state}, ${country}, ${postalCode}`;
-    
-    // // Geocoding
-    // let coordinates = [];
-    // try {
-    //   const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
-    //     params: {
-    //       address: location,
-    //       key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
-    //     }
-    //   })
-    //   let nearestCoordinates = response.data.results[0].geometry.location;
-    //   coordinates.push(nearestCoordinates.lat);
-    //   coordinates.push(nearestCoordinates.lng);
-    // } catch (err) {
-    //   console.log(err)
-    //   alert('Geocoding for the provided address failed')
-    // }
+
+    // Geocoding
+    let coordinates = [];
+    if (streetAddress || city || state || country || postalCode) {
+      try {
+        const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
+          params: {
+            address: location,
+            key: process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
+          }
+        })
+        let nearestCoordinates = response.data.results[0].geometry.location;
+        coordinates.push(nearestCoordinates.lat);
+        coordinates.push(nearestCoordinates.lng);
+      } catch (err) {
+        console.log(err)
+        alert('Geocoding for the provided address failed')
+      }
+    }
 
 
-    const baseURL = 'https://gym-db-postgres-go-api.herokuapp.com'
+    const baseURL = 'https://over-engineered.herokuapp.com/'
     const data = { name, description, logo, images, location, amenities, type, coordinates }
     const config = {
       headers: {
@@ -183,6 +185,7 @@ const Form = () => {
                           id="name"
                           className="block p-2 w-full flex-1 rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
                           placeholder="Example Fitness Gym"
+                          required
                         />
                       </div>
                     </div>
@@ -217,7 +220,7 @@ const Form = () => {
                       className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
                     >
                       <p className=''>Upload logo</p>
-                      <input id="logo-upload" name="logo-upload" type="file" className="sr-only" onChange={(e) => { previewUploadedImages(e, 'logo') }} />
+                      <input id="logo-upload" name="logo-upload" type="file" accept="image/*" className="sr-only" onChange={(e) => { previewUploadedImages(e, 'logo') }} />
                     </label>
                   </div>
 
@@ -249,7 +252,7 @@ const Form = () => {
                             className="relative cursor-pointer rounded-md bg-white font-medium text-indigo-600 focus-within:outline-none focus-within:ring-2 focus-within:ring-indigo-500 focus-within:ring-offset-2 hover:text-indigo-500"
                           >
                             <p className='text-center'>Upload file(s)</p>
-                            <input id="file-upload" name="file-upload" type="file" multiple className="sr-only" onChange={(e) => { previewUploadedImages(e, 'coverPhotos') }} />
+                            <input id="file-upload" name="file-upload" type="file" accept="image/*" multiple className="sr-only" onChange={(e) => { previewUploadedImages(e, 'coverPhotos') }} />
                           </label>
                         </div>
                         <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
@@ -303,6 +306,7 @@ const Form = () => {
                         id="country"
                         autoComplete="country-name"
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        required
                       />
                     </div>
 
@@ -316,6 +320,7 @@ const Form = () => {
                         id="street-address"
                         autoComplete="street-address"
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        required
                       />
                     </div>
 
@@ -329,6 +334,7 @@ const Form = () => {
                         id="city"
                         autoComplete="address-level2"
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        required
                       />
                     </div>
 
@@ -342,6 +348,7 @@ const Form = () => {
                         id="region"
                         autoComplete="address-level1"
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        required
                       />
                     </div>
 
@@ -355,6 +362,7 @@ const Form = () => {
                         id="postal-code"
                         autoComplete="postal-code"
                         className="mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm"
+                        required
                       />
                     </div>
                   </div>
@@ -408,6 +416,7 @@ const Form = () => {
                             name="lounge"
                             type="checkbox"
                             className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                            required
                           />
                         </div>
                         <div className="ml-3 text-sm">
@@ -423,6 +432,7 @@ const Form = () => {
                             name="locker"
                             type="checkbox"
                             className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                            required
                           />
                         </div>
                         <div className="ml-3 text-sm">
@@ -438,6 +448,7 @@ const Form = () => {
                             name="sauna"
                             type="checkbox"
                             className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                            required
                           />
                         </div>
                         <div className="ml-3 text-sm">
@@ -453,6 +464,7 @@ const Form = () => {
                             name="wifi"
                             type="checkbox"
                             className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                            required
                           />
                         </div>
                         <div className="ml-3 text-sm">
@@ -473,6 +485,7 @@ const Form = () => {
                           name="gym-type"
                           type="radio"
                           className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                          required
                         />
                         <label htmlFor="body-building" className="ml-3 block text-sm font-medium text-gray-700">
                           Body building
@@ -484,6 +497,7 @@ const Form = () => {
                           name="gym-type"
                           type="radio"
                           className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                          required
                         />
                         <label htmlFor="mma" className="ml-3 block text-sm font-medium text-gray-700">
                           MMA
@@ -495,6 +509,7 @@ const Form = () => {
                           name="gym-type"
                           type="radio"
                           className="h-4 w-4 border-gray-300 text-indigo-600 focus:ring-indigo-500"
+                          required
                         />
                         <label htmlFor="judo" className="ml-3 block text-sm font-medium text-gray-700">
                           Judo

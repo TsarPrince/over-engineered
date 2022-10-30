@@ -3,13 +3,15 @@ import Head from 'next/head'
 
 import Sidebar from '../components/Sidebar'
 import Navbar from '../components/Navbar'
+import Dashboard from '../components/Dashboard'
 import Table from '../components/Table'
 import Form from '../components/Form'
 
 export default function Home() {
-  const [active, setActive] = useState('database');
+  const [active, setActive] = useState('dashboard');
 
   const ShowActiveItem = () => {
+    if (active === 'dashboard') return <Dashboard />
     if (active === 'database') return <Table active={active} setActive={setActive} />
     if (active === 'addGyms') return <Form />
   }
@@ -17,7 +19,7 @@ export default function Home() {
   return (
     <div>
       <Head>
-        <title>Admin Panel | Your Fitness Coach</title>
+        <title>Admin Panel | Over Engineered</title>
         <meta name="viewport" content="initial-scale=1.0, width=device-width" />
       </Head>
 
