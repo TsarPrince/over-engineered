@@ -61,11 +61,14 @@ const Form = () => {
       console.log(err);
     }
 
-    const location = `${streetAddress}, ${city}, ${state}, ${country}, ${postalCode}`;
+    let location = '';
+    if (streetAddress || city || state || country || postalCode) {
+      location = `${streetAddress}, ${city}, ${state}, ${country}, ${postalCode}`;
+    }
 
     // Geocoding
     let coordinates = [];
-    if (streetAddress || city || state || country || postalCode) {
+    if (location) {
       try {
         const response = await axios.get('https://maps.googleapis.com/maps/api/geocode/json', {
           params: {
@@ -83,7 +86,7 @@ const Form = () => {
     }
 
 
-    const baseURL = 'https://over-engineered.herokuapp.com/'
+    const baseURL = 'https://over-engineered.herokuapp.com'
     const data = { name, description, logo, images, location, amenities, type, coordinates }
     const config = {
       headers: {
@@ -95,7 +98,7 @@ const Form = () => {
       alert('Data uploaded successfully');
     } catch (err) {
       console.log(err);
-      alert(`Error: ${err.message}`)
+      alert(`Error: ${err.response.data.message}`)
     }
     setProcessing(false);
   }
@@ -416,7 +419,6 @@ const Form = () => {
                             name="lounge"
                             type="checkbox"
                             className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                            required
                           />
                         </div>
                         <div className="ml-3 text-sm">
@@ -432,7 +434,6 @@ const Form = () => {
                             name="locker"
                             type="checkbox"
                             className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                            required
                           />
                         </div>
                         <div className="ml-3 text-sm">
@@ -448,7 +449,6 @@ const Form = () => {
                             name="sauna"
                             type="checkbox"
                             className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                            required
                           />
                         </div>
                         <div className="ml-3 text-sm">
@@ -464,7 +464,6 @@ const Form = () => {
                             name="wifi"
                             type="checkbox"
                             className="h-4 w-4 rounded border-gray-300 text-indigo-600 focus:ring-indigo-500"
-                            required
                           />
                         </div>
                         <div className="ml-3 text-sm">
