@@ -31,21 +31,18 @@ export default function Home() {
         <meta property="og:description" content="A generalized admin dashboard built with production ready technologies" />
         <meta property="og:image" content="https://over-engineered.vercel.app/assets/og.png" />
         <meta property="og:image:type" content="image/png" />
-        <meta property="og:image:width" content="417" />
-        <meta property="og:image:height" content="391" />
+        <meta property="og:image:width" content="400" />
+        <meta property="og:image:height" content="300" />
+
+        <meta name="twitter:title" content="Admin Panel | Over Engineered" />
+        <meta name="twitter:description" content="A generalized admin dashboard built with production ready technologies" />
+        <meta name="twitter:image" content="https://over-engineered.vercel.app/assets/og.png" />
+        <meta property="twitter:image:type" content="image/png" />
+        <meta property="twitter:image:width" content="400" />
+        <meta property="twitter:image:height" content="300" />
 
         <meta property="og:url" content="https://over-engineered.vercel.app" />
         <meta property="og:type" content="website" />
-
-        {/* <meta name="twitter:title" content="My Pets Life" /> */}
-        {/* <meta name="twitter:description" content="Never Miss Your Pet's Schedule and Activity" /> */}
-        {/* <meta name="twitter:image" content="https://d2m3ee76kdhdjs.cloudfront.net/static_assets/1200*630.png" /> */}
-        {/* <meta name="twitter:image" content="https://d3vtczj1cfkpaj.cloudfront.net/assets/ogimage-min.jpg" /> */}
-        {/* <meta name="twitter:image" content="https://s3.ap-south-1.amazonaws.com/techgabbar.com/assets/websit-og-image-min.png" /> */}
-        {/* <meta name="twitter:image" content="https://s3.ap-south-1.amazonaws.com/techgabbar.com/assets/wesbite-og-image.png" /> */}
-        {/* <meta property="twitter:image:type" content="image/png" /> */}
-        {/* <meta property="twitter:image:width" content="800" /> */}
-        {/* <meta property="twitter:image:height" content="800" /> */}
 
       </Head>
 

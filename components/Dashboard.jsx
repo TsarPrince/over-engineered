@@ -28,7 +28,9 @@ const Dashboard = () => {
           ? (<div className='flex gap-x-4 gap-y-6 flex-wrap '>
             {data.reverse().map(gym => (
               gym.images.map(url => (
-                <img key={url} className='h-32 rounded-xl shadow-md' src={url} alt={url}></img>
+                <div key={url}>
+                  <img className='h-32 rounded-xl shadow-md' src={url} alt={url}></img>
+                </div>
               ))
             ))}
           </div>)
