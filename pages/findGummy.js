@@ -1,6 +1,4 @@
-import { useEffect } from 'react'
 import dynamic from 'next/dynamic'
-
 
 setTimeout(() => {
   const canvas = document.querySelector('#canvas');
@@ -132,6 +130,8 @@ setTimeout(() => {
 
 
   window.addEventListener('keydown', (e) => {
+    let refresh = true;
+
     // prevent scrolling
     if (e.key == ' ' || e.key == 'ArrowUp' || e.key == 'ArrowDown') {
       e.preventDefault();
@@ -151,8 +151,12 @@ setTimeout(() => {
       goDown();
     } else if (e.key == 'ArrowRight' || e.key == 'd') {
       goRight();
+    } else {
+      refresh = false;
     }
-    updateUI();
+    if (refresh) {
+      updateUI();
+    }
   })
 
   document.querySelector('#goUp').addEventListener('click', () => { goUp(); updateUI(); })
@@ -168,14 +172,13 @@ setTimeout(() => {
   document.querySelector('#renderSize800').addEventListener('click', () => renderSize(800))
 
 }, 1000);
+
 const FindGummy = () => {
-
-
   return (
     <div className="px-6 py-4 font-mono">
 
       <div className="space-y-6">
-        <p className="font-montserrat text-2xl font-medium">Try to reach the target using keyboard or on-screen buttons to find
+        <p className="font-montserrat text-lg md:text-2xl font-semibold">Try to reach the target using keyboard or on-screen buttons to find
           the gummy bear.</p>
 
         <canvas className="bg-slate-700 rounded-xl" id="canvas" width="200px" height="200px"></canvas>
@@ -233,12 +236,12 @@ const FindGummy = () => {
         </div>
 
         <div>
-          <p className="bg-pink-500 p-4 hidden rounded-xl text-white font-montserrat font-bold text-3xl" id="wonMsg">
+          <p className="bg-pink-500 p-4 hidden rounded-xl text-white font-montserrat font-bold text-xl md:text-3xl" id="wonMsg">
             Yay! You made it.🐒
           </p>
         </div>
 
-        <div className="flex space-x-8 items-end">
+        <div className="flex flex-col md:flex-row flex-wrap space-y-1 md:space-x-8 md:items-end font-sm">
           <h3 className="text-3xl font-bold font-montserrat">Z<sub>n+1</sub> = Z<sub>n</sub><sup>2</sup> + c</h3>
           <a className="text-blue-600 hover:text-blue-700 underline" href="https://www.youtube.com/watch?v=NGMRB4O922I"
             target="_blank" rel="noreferrer">What&apos;s this?</a>
@@ -251,18 +254,20 @@ const FindGummy = () => {
 
         <button className="btn" id='reset'>Reset</button>
         <div>
+          <div className='flex items-center'>
           <input className="transition-all" type="checkbox" name="hint" id="hint" />
-          <label htmlFor="hint">Make my life easier</label>
+          <label className='ml-2' htmlFor="hint">Make my life easier</label>
+          </div>
           <p className="text-slate-500 text-xs">(Plots the target point on the map with a white dot to follow.)</p>
         </div>
 
         <div>
           <p>Render size: <span id="canvasWidth">200</span> x <span id="canvasHeight">200</span> px</p>
-          <div className="flex space-x-2">
-            <button className="btn-1" id='renderSize100'>100x100</button>
-            <button className="btn-2" id='renderSize200'>200x200</button>
-            <button className="btn-3" id='renderSize400'>400x400</button>
-            <button className="btn-4" id='renderSize800'>800x800</button>
+          <div className="flex flex-wrap">
+            <button className="btn-1 mr-2 mb-2" id='renderSize100'>100x100</button>
+            <button className="btn-2 mr-2 mb-2" id='renderSize200'>200x200</button>
+            <button className="btn-3 mr-2 mb-2" id='renderSize400'>400x400</button>
+            <button className="btn-4 mr-2 mb-2" id='renderSize800'>800x800</button>
           </div>
         </div>
 
