@@ -7,11 +7,13 @@ import Dashboard from '../components/Dashboard'
 import Table from '../components/Table'
 import Form from '../components/Form'
 
-export default function Home() {
+import { client, urlFor } from '../lib/client';
+
+export default function Home({ posts }) {
   const [active, setActive] = useState('dashboard');
 
-  const ShowActiveItem = () => {
-    if (active === 'dashboard') return <Dashboard />
+  const ShowActiveItem = ({ posts }) => {
+    if (active === 'dashboard') return <Dashboard posts={posts} />
     if (active === 'database') return <Table active={active} setActive={setActive} />
     if (active === 'addGyms') return <Form />
   }
@@ -49,8 +51,18 @@ export default function Home() {
       <Sidebar active={active} setActive={setActive} />
       <div className="ml-auto mb-6 lg:w-[75%] xl:w-[80%] 2xl:w-[85%]">
         <Navbar active={active} />
-        <ShowActiveItem />
+        <ShowActiveItem posts={posts} />
       </div>
     </div>
   )
+}
+
+
+export async function getServerSideProps() {
+  const posts = await client.fetch(`*[_type == "post"]`);
+  return {
+    props: {
+      posts
+    },
+  };
 }
